@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraAccessException;
+import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean isFlashOn;
     private Timer timer = new Timer();
 
+    private Camera cameraOld;
+    private Parameters parameter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +88,19 @@ public class MainActivity extends AppCompatActivity {
 
         if (camera == null) {
             camera = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-            try {
-                cameraId = camera.getCameraIdList()[0];
-            } catch (CameraAccessException e) {
-                Log.e("Camera Error. ", e.getMessage());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                try {
+                    cameraId = camera.getCameraIdList()[0];
+                } catch (CameraAccessException e) {
+                    Log.e("Camera Error. ", e.getMessage());
+                }
+            } else {
+                try {
+                    cameraOld = Camera.open();
+                    parameter = cameraOld.getParameters();
+                } catch (RuntimeException e) {
+                    System.out.println("Error: Failed to Open: " + e.getMessage());
+                }
             }
         }
     }
@@ -96,6 +109,12 @@ public class MainActivity extends AppCompatActivity {
             try {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     camera.setTorchMode(cameraId, true);
+                    isFlashOn = true;
+                } else {
+                    parameter = this.cameraOld.getParameters();
+                    parameter.setFlashMode(Parameters.FLASH_MODE_TORCH);
+                    this.cameraOld.setParameters(parameter);
+                    this.cameraOld.startPreview();
                     isFlashOn = true;
                 }
             } catch (Exception e) {
@@ -108,6 +127,11 @@ public class MainActivity extends AppCompatActivity {
             try {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     camera.setTorchMode(cameraId, false);
+                    isFlashOn = false;
+                } else {
+                    parameter.setFlashMode(Parameters.FLASH_MODE_OFF);
+                    this.cameraOld.setParameters(parameter);
+                    this.cameraOld.stopPreview();
                     isFlashOn = false;
                 }
             } catch (Exception e) {
