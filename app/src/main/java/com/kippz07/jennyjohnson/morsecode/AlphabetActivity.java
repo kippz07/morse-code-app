@@ -22,64 +22,39 @@ public class AlphabetActivity extends AppCompatActivity {
     private Timer timer = new Timer();
     private Camera cameraOld;
     private Camera.Parameters parameter;
-    private TextView mA;
-    private TextView mB;
-    private TextView mC;
-    private TextView mD;
-    private TextView mE;
-    private TextView mF;
-    private TextView mG;
-    private TextView mH;
-    private TextView mI;
-    private TextView mJ;
-    private TextView mK;
-    private TextView mL;
-    private TextView mM;
-    private TextView mN;
-    private TextView mO;
-    private TextView mP;
-    private TextView mQ;
-    private TextView mR;
-    private TextView mS;
-    private TextView mT;
-    private TextView mU;
-    private TextView mV;
-    private TextView mW;
-    private TextView mX;
-    private TextView mY;
-    private TextView mZ;
+    private boolean inProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alphabet);
 
-        mA = findViewById(R.id.a);
-        mB = findViewById(R.id.b);
-        mC = findViewById(R.id.c);
-        mD = findViewById(R.id.d);
-        mE = findViewById(R.id.e);
-        mF = findViewById(R.id.f);
-        mG = findViewById(R.id.g);
-        mH = findViewById(R.id.h);
-        mI = findViewById(R.id.i);
-        mJ = findViewById(R.id.j);
-        mK = findViewById(R.id.k);
-        mL = findViewById(R.id.l);
-        mM = findViewById(R.id.m);
-        mN = findViewById(R.id.n);
-        mO = findViewById(R.id.o);
-        mP = findViewById(R.id.p);
-        mQ = findViewById(R.id.q);
-        mR = findViewById(R.id.r);
-        mS = findViewById(R.id.s);
-        mT = findViewById(R.id.t);
-        mU = findViewById(R.id.u);
-        mV = findViewById(R.id.v);
-        mW = findViewById(R.id.w);
-        mX = findViewById(R.id.x);
-        mY = findViewById(R.id.y);
-        mZ = findViewById(R.id.z);
+        TextView mA = findViewById(R.id.a);
+        TextView mB = findViewById(R.id.b);
+        TextView mC = findViewById(R.id.c);
+        TextView mD = findViewById(R.id.d);
+        TextView mE = findViewById(R.id.e);
+        TextView mF = findViewById(R.id.f);
+        TextView mG = findViewById(R.id.g);
+        TextView mH = findViewById(R.id.h);
+        TextView mI = findViewById(R.id.i);
+        TextView mJ = findViewById(R.id.j);
+        TextView mK = findViewById(R.id.k);
+        TextView mL = findViewById(R.id.l);
+        TextView mM = findViewById(R.id.m);
+        TextView mN = findViewById(R.id.n);
+        TextView mO = findViewById(R.id.o);
+        TextView mP = findViewById(R.id.p);
+        TextView mQ = findViewById(R.id.q);
+        TextView mR = findViewById(R.id.r);
+        TextView mS = findViewById(R.id.s);
+        TextView mT = findViewById(R.id.t);
+        TextView mU = findViewById(R.id.u);
+        TextView mV = findViewById(R.id.v);
+        TextView mW = findViewById(R.id.w);
+        TextView mX = findViewById(R.id.x);
+        TextView mY = findViewById(R.id.y);
+        TextView mZ = findViewById(R.id.z);
 
         getCamera();
 
@@ -243,35 +218,71 @@ public class AlphabetActivity extends AppCompatActivity {
 
 
     private void one(int first) {
-        flashTimer(0);
-        flashTimer(first);
+        if (!inProgress) {
+            inProgress = true;
+            flashTimer(0);
+            flashTimer(first);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    inProgress = false;
+                }
+            }, first + 400);
+        }
     }
 
     private void two(int first, int second) {
-        flashTimer(0);
-        flashTimer(first);
-        flashTimer(first + 200);
-        flashTimer(first + 200 + second);
+        if (!inProgress) {
+            inProgress = true;
+            flashTimer(0);
+            flashTimer(first);
+            flashTimer(first + 200);
+            flashTimer(first + 200 + second);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    inProgress = false;
+                }
+            }, first + 200 + second + 400);
+        }
     }
 
     private void three(int first, int second, int third) {
-        flashTimer(0);
-        flashTimer(first);
-        flashTimer(first + 200);
-        flashTimer(first + 200 + second);
-        flashTimer(first + 200 + second + 200);
-        flashTimer(first + 200 + second + 200 + third);
+        if (!inProgress) {
+            inProgress = true;
+            flashTimer(0);
+            flashTimer(first);
+            flashTimer(first + 200);
+            flashTimer(first + 200 + second);
+            flashTimer(first + 200 + second + 200);
+            flashTimer(first + 200 + second + 200 + third);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    inProgress = false;
+                }
+            }, first + 200 + second + 200 + third + 400);
+        }
     }
 
     private void four(int first, int second, int third, int fourth) {
-        flashTimer(0);
-        flashTimer(first);
-        flashTimer(first + 200);
-        flashTimer(first + 200 + second);
-        flashTimer(first + 200 + second + 200);
-        flashTimer(first + 200 + second + 200 + third);
-        flashTimer(first + 200 + second + 200 + third + 200);
-        flashTimer(first + 200 + second + 200 + third + 200 + fourth);
+        if (!inProgress) {
+            inProgress = true;
+            flashTimer(0);
+            flashTimer(first);
+            flashTimer(first + 200);
+            flashTimer(first + 200 + second);
+            flashTimer(first + 200 + second + 200);
+            flashTimer(first + 200 + second + 200 + third);
+            flashTimer(first + 200 + second + 200 + third + 200);
+            flashTimer(first + 200 + second + 200 + third + 200 + fourth);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    inProgress = false;
+                }
+            }, first + 200 + second + 200 + third + 200 + fourth + 400);
+        }
     }
 
     private void flashTimer(int delay) {
@@ -290,8 +301,9 @@ public class AlphabetActivity extends AppCompatActivity {
     private void getCamera() {
 
         if (camera == null) {
-            camera = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                camera = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
                 try {
                     cameraId = camera.getCameraIdList()[0];
                 } catch (CameraAccessException e) {
@@ -314,10 +326,10 @@ public class AlphabetActivity extends AppCompatActivity {
                 camera.setTorchMode(cameraId, true);
                 isFlashOn = true;
             } else {
-                parameter = this.cameraOld.getParameters();
+                parameter = cameraOld.getParameters();
                 parameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-                this.cameraOld.setParameters(parameter);
-                this.cameraOld.startPreview();
+                cameraOld.setParameters(parameter);
+                cameraOld.startPreview();
                 isFlashOn = true;
             }
         } catch (Exception e) {
@@ -333,8 +345,8 @@ public class AlphabetActivity extends AppCompatActivity {
                 isFlashOn = false;
             } else {
                 parameter.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-                this.cameraOld.setParameters(parameter);
-                this.cameraOld.stopPreview();
+                cameraOld.setParameters(parameter);
+                cameraOld.stopPreview();
                 isFlashOn = false;
             }
         } catch (Exception e) {
