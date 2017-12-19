@@ -1,6 +1,7 @@
 package com.kippz07.jennyjohnson.morsecode;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraAccessException;
 import android.os.Build;
@@ -33,13 +34,14 @@ public class MainActivity extends AppCompatActivity {
 
         getCamera();
 
-
         mAlphabet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, AlphabetActivity.class);
+                startActivity(intent);
             }
         });
+
         mSos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,27 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 flashTimer(5400);
             }
         });
-    }
-
-    private void one(int first) {
-        flashTimer(0);
-        flashTimer(first);
-    }
-
-    private void two(int first, int second) {
-        flashTimer(0);
-        flashTimer(first);
-        flashTimer(first + 200);
-        flashTimer(first + 200 + second);
-    }
-
-    private void three(int first, int second, int third) {
-        flashTimer(0);
-        flashTimer(first);
-        flashTimer(first + 200);
-        flashTimer(first + 200 + second);
-        flashTimer(first + 200 + second + 200);
-        flashTimer(first + 200 + second + 200 + third);
     }
 
     private void flashTimer(int delay) {
