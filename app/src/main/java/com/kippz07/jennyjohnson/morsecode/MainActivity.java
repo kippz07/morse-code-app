@@ -15,8 +15,8 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView hello;
-    private TextView helloo;
+    private TextView mAlphabet;
+    private TextView mSos;
     private CameraManager camera;
     private String cameraId;
     private boolean isFlashOn;
@@ -28,22 +28,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        hello = findViewById(R.id.hello);
-        helloo = findViewById(R.id.helloo);
+        mAlphabet = findViewById(R.id.alphabet);
+        mSos = findViewById(R.id.sos);
 
         getCamera();
 
 
-        hello.setOnClickListener(new View.OnClickListener() {
+        mAlphabet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                three(200, 200, 200);
+
             }
         });
-        helloo.setOnClickListener(new View.OnClickListener() {
+        mSos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                three(600, 600, 600);
+                flashTimer(0); //.
+                flashTimer(200);
+                flashTimer(400); //.
+                flashTimer(600);
+                flashTimer(800); //.
+                flashTimer(1000);
+                flashTimer(1600); //-
+                flashTimer(2200);
+                flashTimer(2400); //-
+                flashTimer(3000);
+                flashTimer(3200); //-
+                flashTimer(3800);
+                flashTimer(4400); //.
+                flashTimer(4600);
+                flashTimer(4800); //.
+                flashTimer(5000);
+                flashTimer(5200); //.
+                flashTimer(5400);
             }
         });
     }

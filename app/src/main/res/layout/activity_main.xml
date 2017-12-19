@@ -4,20 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kippz07.jennyjohnson.morsecode.MainActivity">
+    tools:context="com.kippz07.jennyjohnson.morsecode.MainActivity"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/hello"
-        android:layout_width="wrap_content"
+        android:id="@+id/alphabet"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="100dp"
-        android:text="S" />
+        android:textSize="50sp"
+        android:text="Alphabet"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:paddingTop="50dp"/>
 
     <TextView
-        android:id="@+id/helloo"
-        android:layout_width="wrap_content"
+        android:id="@+id/sos"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="100dp"
-        android:text="O" />
+        android:textSize="100sp"
+        android:text="SOS"
+        android:layout_weight="1"
+        android:textAlignment="center"/>
 
 </LinearLayout>
