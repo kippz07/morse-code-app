@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/morse-code-app.iml" filepath="$PROJECT_DIR$/morse-code-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/morseCode.iml" filepath="$PROJECT_DIR$/morseCode.iml" />
     </modules>
   </component>

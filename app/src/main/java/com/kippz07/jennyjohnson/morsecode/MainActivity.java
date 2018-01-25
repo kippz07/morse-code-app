@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mAlphabet;
     private TextView mSos;
+    private TextView mTorch;
     private CameraManager camera;
     private String cameraId;
     private boolean isFlashOn;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAlphabet = findViewById(R.id.alphabet);
         mSos = findViewById(R.id.sos);
+        mTorch = findViewById(R.id.torch);
 
         getCamera();
 
@@ -43,6 +45,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AlphabetActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        mTorch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isFlashOn) {
+                    turnOnFlash();
+                    isFlashOn = true;
+                } else {
+                    turnOffFlash();
+                    isFlashOn = false;
+                }
             }
         });
 
